@@ -1,2 +1,5 @@
 # commit_check_for_dss8
-We do " a commit per day" thing for helping them to get their job. I check their commit log every night (11 pm)
+ 
+
+> 매일 밤 11시 커밋을 안한 사람을 찾아 슬랙에 공지 합니다. 
+
