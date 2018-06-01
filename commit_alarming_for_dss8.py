@@ -103,7 +103,7 @@ for name in today_counts.keys():
         no_commit_people.append(name)
 
 
-# In[7]:
+# In[10]:
 
 
 # for security of webhook url 
@@ -122,7 +122,7 @@ with open("webhookurl.p", "rb") as f:
     webhook_url = pickle.load(f)
 
 
-# In[14]:
+# In[9]:
 
 
 def send_slack(msg, emoji):
@@ -133,7 +133,7 @@ def send_slack(msg, emoji):
 
     # 데이터
     data = {
-        "channel": "#webhook", # 채널이름이 다르면 다른 채널의 이름을 작성
+        "channel": "#1day1commit", # 채널이름이 다르면 다른 채널의 이름을 작성
         "emoji": emoji,
         "msg": msg,
         "username": "김 현규 매니져B",
