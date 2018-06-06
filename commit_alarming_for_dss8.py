@@ -33,7 +33,6 @@ github_table = {
     "https://github.com/seokyeongheo" : '허 석영B',
     "https://github.com/jtrhee" : "이 정택B",
     "https://github.com/ChanminJun" : "전 찬민B",
-    "https://github.com/SeungwooYang" : "양 승우B",
     "https://github.com/Jeonhyunil" : "전 현일B",
     "https://github.com/jaykim-asset" : "김 종재B",
     "https://github.com/hhj235" : "황 한진A",
@@ -41,6 +40,8 @@ github_table = {
     "https://github.com/SHDeseo" : "배 소현A",
     "https://github.com/jahn0406" : "안 태언A",
     "https://github.com/benestump" : "윤 현근A",
+    "http://github.com/twosb" : "이 상범A",
+    "https://github.com/Boston123456" : "표 준희A"
 }
 
 github_url = [url for url in github_table.keys()]
@@ -51,12 +52,11 @@ github_url = [url for url in github_table.keys()]
 
 # today_count
 today_counts = {}
+today_date = datetime.datetime.now().strftime('%Y-%m-%d')
 for i in range(len(github_url)):
     # getting html file
     res = requests.get(github_url[i])
     soup = BeautifulSoup(res.content, "html.parser")
-
-    today_date = datetime.datetime.now().strftime('%Y-%m-%d')
     # today_date's data
     today = soup.select_one("rect[data-date={}]".format(today_date))
     # count! (target)
@@ -71,15 +71,17 @@ for i in range(len(github_url)):
 today_counts
 
 
-# In[5]:
+# In[13]:
 
 
 def today_commit_max(today_counts):
+    
     """
     today_counts : 오늘의 커밋 현황 
     ---------------------------
     return : 중복인 사람 모두 출력 
     """
+    
     result = []
     max_commit = max(today_counts.items(), key = lambda x: x[1])[1]
     
@@ -92,7 +94,7 @@ def today_commit_max(today_counts):
 today_commit_king = today_commit_max(today_counts)
 
 
-# In[6]:
+# In[14]:
 
 
 # finding no commit people 
@@ -103,7 +105,7 @@ for name in today_counts.keys():
         no_commit_people.append(name)
 
 
-# In[10]:
+# In[15]:
 
 
 # for security of webhook url 
@@ -113,16 +115,16 @@ for name in today_counts.keys():
 #     pickle.dump(Webhook_URL, f) # (obj, file)
 
 
-# In[8]:
+# In[16]:
 
 
-# load webhook url 
+# # load webhook url 
 
 with open("webhookurl.p", "rb") as f:
     webhook_url = pickle.load(f)
 
 
-# In[9]:
+# In[17]:
 
 
 def send_slack(msg, emoji):
@@ -132,6 +134,7 @@ def send_slack(msg, emoji):
     webhook_URL = webhook_url
 
     # 데이터
+    #1day1commit
     data = {
         "channel": "#1day1commit", # 채널이름이 다르면 다른 채널의 이름을 작성
         "emoji": emoji,
@@ -168,5 +171,12 @@ if len(no_commit_people) == 0:
     """.format(("`*, \n*`").join([" : ".join(r) for r in today_commit_king]))
     emoji = ":peach:"
     
+
 send_slack(msg, emoji)
+
+
+# In[18]:
+
+
+print(today_counts, sep="\n", end='\n')
 
