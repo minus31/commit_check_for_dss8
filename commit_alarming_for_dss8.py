@@ -29,7 +29,6 @@ github_table = {
     "https://github.com/Junhojuno" : "김 준호B", 
     "https://github.com/hyelansgithub" : "정 혜란B",
     "https://github.com/annakimm" : "김 혜진B" ,
-    "https://github.com/Jacob-Hong" : "홍 재영B",
     "https://github.com/seokyeongheo" : '허 석영B',
     "https://github.com/jtrhee" : "이 정택B",
     "https://github.com/ChanminJun" : "전 찬민B",
